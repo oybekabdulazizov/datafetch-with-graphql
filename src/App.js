@@ -1,5 +1,7 @@
 import useAppState from './hooks/useAppState';
 
+import Form from './Form';
+
 import './App.css';
 
 function App() {
@@ -42,45 +44,16 @@ function App() {
 
   return (
     <div className='App'>
-      <form onSubmit={handleSubmit}>
-        <div className='dropdown-container'>
-          <div className='dropdown-header' onClick={toggleDropdown}>
-            {selectedContinent === ''
-              ? 'Choose a continent'
-              : selectedContinent}
-          </div>
-          {dropdownOpen && (
-            <div className='dropdown-list'>
-              {continents.map((continent) => (
-                <div
-                  key={continent.code}
-                  onClick={() => {
-                    setSelectedContinent(continent.name);
-                    toggleDropdown();
-                  }}
-                >
-                  {continent.name}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-        <div>
-          <label>
-            Pick a number between 2 and 10{' '}
-            <input
-              type='number'
-              value={number}
-              onChange={handleNumberChange}
-              min={2}
-              max={10}
-              placeholder='and type it here :)'
-              style={{ width: '10em' }}
-            />
-          </label>
-        </div>
-        <button type='submit'>Submit</button>
-      </form>
+      <Form
+        handleSubmit={handleSubmit}
+        toggleDropdown={toggleDropdown}
+        selectedContinent={selectedContinent}
+        dropdownOpen={dropdownOpen}
+        continents={continents}
+        setSelectedContinent={setSelectedContinent}
+        number={number}
+        handleNumberChange={handleNumberChange}
+      />
       <section>
         <h2>
           Continent{': '}
