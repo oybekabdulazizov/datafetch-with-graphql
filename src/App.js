@@ -46,30 +46,17 @@ function App() {
           </div>
           {dropdownOpen && (
             <div className='dropdown-list'>
-              <div
-                onClick={() => {
-                  setSelectedContinent('option#1');
-                  toggleDropdown();
-                }}
-              >
-                Option #1
-              </div>
-              <div
-                onClick={() => {
-                  setSelectedContinent('option#2');
-                  toggleDropdown();
-                }}
-              >
-                Option #2
-              </div>
-              <div
-                onClick={() => {
-                  setSelectedContinent('option#3');
-                  toggleDropdown();
-                }}
-              >
-                Option #3
-              </div>
+              {continents.map((continent) => (
+                <div
+                  key={continent.code}
+                  onClick={() => {
+                    setSelectedContinent(continent.name);
+                    toggleDropdown();
+                  }}
+                >
+                  {continent.name}
+                </div>
+              ))}
             </div>
           )}
         </div>
