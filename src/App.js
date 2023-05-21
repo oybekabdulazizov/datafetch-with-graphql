@@ -42,32 +42,52 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (selectedContinent === '') {
+      alert('Please choose a continent!');
+      return;
+    }
+
     const selectedContinentCountries = data.countries.filter(
       (country) => country.continent.name === selectedContinent
     );
 
     const randomCountries = [];
+
     for (let index = 0; index < number; index++) {
       let randIdx = Math.floor(
         Math.random() * selectedContinentCountries.length
       );
+
+      function duplicateExists(countryWithDetails) {
+        return randomCountries.some(
+          ({ name }) => name['common'] === countryWithDetails.name['common']
+        );
+      }
+
       const randCountry = selectedContinentCountries[randIdx];
-      const countryWithDetails = await axios
-        .get(`https://restcountries.com/v3.1/name/${randCountry.name}`)
-        .then((res) => {
-          return res.data[0];
-        });
+      let countryWithDetails;
+      let isDuplicate = true;
+      while (isDuplicate) {
+        countryWithDetails = await axios
+          .get(`https://restcountries.com/v3.1/name/${randCountry.name}`)
+          .then((res) => {
+            return res.data[0];
+          })
+          .catch((err) => {
+            return err;
+          });
+        isDuplicate = duplicateExists(countryWithDetails);
+      }
       randomCountries.push(countryWithDetails);
     }
     setCountriesRes([...randomCountries]);
-    console.log(randomCountries);
   };
 
   const { loading, error, data } = useQuery(GET_COUNTRIES);
 
   if (loading) return <h2>Loading...</h2>;
   if (error) return <h2>Error! {error.message}</h2>;
-  const { continents, countries } = data;
+  const { continents } = data;
 
   const getLanguages = (object) => {
     let languages = '';
@@ -121,7 +141,7 @@ function App() {
       </form>
       <section>
         <h2>
-          Continent{' '}
+          Continent{': '}
           {selectedContinent === ''
             ? '(please choose a continent from the above dropdown menu)'
             : selectedContinent}
