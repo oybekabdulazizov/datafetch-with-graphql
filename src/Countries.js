@@ -2,7 +2,7 @@ import React from 'react';
 
 import Country from './Country';
 
-import './Countries.css';
+import './styles/Countries.css';
 
 export default function Countries({ selectedContinent, countries }) {
   const getLanguages = (object) => {

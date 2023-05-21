@@ -4,7 +4,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 
 import App from './App';
 
-import './index.css';
+import './styles/index.css';
 
 const client = new ApolloClient({
   uri: 'https://countries.trevorblades.com/graphql',

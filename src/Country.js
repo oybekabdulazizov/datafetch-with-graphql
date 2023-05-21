@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './Country.css';
+import './styles/Country.css';
 
 export default function Country({
   name,
