@@ -12,7 +12,7 @@ Head into the project folder and run the below command:
 
 ### `npm install --legacy-peer-deps` 
 
-Once complete, please check the npm install command and make sure it completed with no errors. 
+Once complete, please check your terminal and make sure it completed with no errors. 
 
 Then run: 
 
