@@ -39,6 +39,7 @@ export default function useAppState() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setCountriesRes([]);
 
     if (selectedContinent === '') {
       alert('Please choose a continent!');
@@ -66,18 +67,27 @@ export default function useAppState() {
       let countryWithDetails;
       let isDuplicate = true;
       while (isDuplicate) {
-        countryWithDetails = await axios
-          .get(`https://restcountries.com/v3.1/name/${randCountry.name}`)
-          .then((res) => {
-            return res.data[0];
-          })
-          .catch((err) => {
-            return err;
-          });
+        let apiRes;
+        try {
+          apiRes = await axios
+            .get(`https://restcountries.com/v3.1/name/${randCountry.name}`)
+            .then((res) => {
+              return res;
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+          countryWithDetails = apiRes.data[0];
+        } catch (err) {
+          console.log(err);
+        }
+
         isDuplicate = duplicateExists(countryWithDetails);
       }
+
       randomCountries.push(countryWithDetails);
     }
+
     setCountriesRes([...randomCountries]);
   };
 

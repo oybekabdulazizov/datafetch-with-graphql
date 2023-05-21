@@ -30,6 +30,16 @@ function App() {
     return languages.slice(0, languages.length - 1);
   };
 
+  const getCurrencies = (object) => {
+    let currencies = '';
+    for (const key in object) {
+      const innerObj = object[key];
+      currencies += `${innerObj['name']}, `;
+    }
+    currencies = currencies.trim();
+    return currencies.slice(0, currencies.length - 1);
+  };
+
   return (
     <div className='App'>
       <form onSubmit={handleSubmit}>
@@ -82,12 +92,9 @@ function App() {
           {countriesRes.map((country) => (
             <ul key={country.flag}>
               <li>Name: {country.name['common']}</li>
-              <li>Capital: {country.capital[0]}</li>
+              <li>Capital: {country.capital[0] ? country.capital[0] : ''}</li>
               <li>Population: {country.population}</li>
-              <li>
-                Currency:{' '}
-                {country.currencies[Object.keys(country.currencies)[0]]['name']}
-              </li>
+              <li>Currency: {getCurrencies(country.currencies)}</li>
               <li>Subregion: {country.subregion}</li>
               <li>Languages: {getLanguages(country.languages)}</li>
             </ul>
