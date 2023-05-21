@@ -28,8 +28,15 @@ function App() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [selectedContinent, setSelectedContinent] =
     useState('Choose a continent');
+  const [number, setNumber] = useState(
+    Math.floor(Math.random() * (10 - 2) + 2)
+  );
 
   const toggleDropdown = () => setDropdownOpen((prevState) => !prevState);
+
+  const handleNumberChange = (e) => {
+    setNumber(e.target.value);
+  };
 
   const { loading, error, data } = useQuery(GET_COUNTRIES);
 
@@ -59,6 +66,20 @@ function App() {
               ))}
             </div>
           )}
+        </div>
+        <div>
+          <label for='number'>
+            Pick a number between 2 and 10{' '}
+            <input
+              type='number'
+              value={number}
+              onChange={handleNumberChange}
+              min={2}
+              max={10}
+              placeholder='and type it here :)'
+              style={{ width: '10em' }}
+            />
+          </label>
         </div>
       </form>
     </div>
