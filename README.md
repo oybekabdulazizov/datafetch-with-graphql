@@ -2,15 +2,17 @@
 
 ## Desctription 
 
-This project highlights pulling data from a grapqhl API and demonstrating a randomly requested number of countries. 
+This project highlights pulling data from a grapqhl API and demonstrating a randomly requested number of countries.
 
 In order to run the project, clone the repository to your local machine using your fav terminal. 
 
-Then, run the below command inside the project folder: 
+### `git clone https://github.com/oybekabdulazizov/datafetch-with-graphql.git`
+
+Head into the project folder and run the below command: 
 
 ### `npm install --legacy-peer-deps` 
 
-Once complete, check the npm install command completed with no errors. 
+Once complete, please check the npm install command and make sure it completed with no errors. 
 
 Then run: 
 
