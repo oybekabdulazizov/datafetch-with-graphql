@@ -1,5 +1,8 @@
 import React from 'react';
+
 import Country from './Country';
+
+import './Countries.css';
 
 export default function Countries({ selectedContinent, countries }) {
   const getLanguages = (object) => {
@@ -21,32 +24,38 @@ export default function Countries({ selectedContinent, countries }) {
     return currencies.slice(0, currencies.length - 1);
   };
 
+  let showData = countries.length > 0;
+
   return (
-    <section>
-      <h2>
-        Continent{': '}
-        {selectedContinent === ''
-          ? '(please choose a continent from the above dropdown menu)'
-          : selectedContinent}
-      </h2>
-      <div>
-        {countries.map(
-          (
-            { name, capital, population, currencies, subregion, languages },
-            idx
-          ) => (
-            <Country
-              key={idx}
-              name={name['common']}
-              capital={capital[0]}
-              population={population}
-              currencies={getCurrencies(currencies)}
-              subregion={subregion}
-              languages={getLanguages(languages)}
-            />
-          )
-        )}
-      </div>
+    <section className='countries-wrapper'>
+      {showData && (
+        <>
+          <h2>
+            Continent{': '}
+            {selectedContinent === ''
+              ? '(please choose a continent from the above dropdown menu)'
+              : selectedContinent}
+          </h2>
+          <div className='countries'>
+            {countries.map(
+              (
+                { name, capital, population, currencies, subregion, languages },
+                idx
+              ) => (
+                <Country
+                  key={idx}
+                  name={name['common']}
+                  capital={capital[0]}
+                  population={population}
+                  currencies={getCurrencies(currencies)}
+                  subregion={subregion}
+                  languages={getLanguages(languages)}
+                />
+              )
+            )}
+          </div>
+        </>
+      )}
     </section>
   );
 }

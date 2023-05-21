@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './Form.css';
+
 export default function Form({
   handleSubmit,
   toggleDropdown,
@@ -12,29 +14,33 @@ export default function Form({
 }) {
   return (
     <form onSubmit={handleSubmit}>
-      <div className='dropdown-container'>
-        <div className='dropdown-header' onClick={toggleDropdown}>
-          {selectedContinent === '' ? 'Choose a continent' : selectedContinent}
-        </div>
-        {dropdownOpen && (
-          <div className='dropdown-list'>
-            {continents.map((continent) => (
-              <div
-                key={continent.code}
-                onClick={() => {
-                  setSelectedContinent(continent.name);
-                  toggleDropdown();
-                }}
-              >
-                {continent.name}
-              </div>
-            ))}
+      <section className='dropdown-wrapper'>
+        <span className='label'>Choose a continent</span>
+        <div className='dropdown-container'>
+          <div className='dropdown-header' onClick={toggleDropdown}>
+            {selectedContinent === '' ? '...' : selectedContinent}
           </div>
-        )}
-      </div>
-      <div>
-        <label>
-          Pick a number between 2 and 10{' '}
+          {dropdownOpen && (
+            <div className='dropdown-list'>
+              {continents.map((continent) => (
+                <div
+                  className='dropdown-item'
+                  key={continent.code}
+                  onClick={() => {
+                    setSelectedContinent(continent.name);
+                    toggleDropdown();
+                  }}
+                >
+                  {continent.name}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+      <div className='input-wrapper'>
+        <label className='label'>
+          Pick a number (2-10){' '}
           <input
             type='number'
             value={number}
